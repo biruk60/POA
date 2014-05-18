@@ -1,0 +1,23 @@
+﻿
+@model POA.Web.Models.Agent.EditAgentForm
+@{
+    ViewBag.Title = "Edit " + Model.First_Name;
+}
+
+<h2>Edit User</h2>
+@using (Html.BeginForm("Edit", "Agent", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.Agent_ID)
+    
+
+    @Html.EditorForModel()
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save Changes" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Cancel", "Agent", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}

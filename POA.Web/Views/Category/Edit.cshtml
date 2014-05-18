@@ -1,0 +1,22 @@
+﻿@model POA.Web.Models.Category.EditCategoryForm
+@{
+    ViewBag.Category = "Edit " + Model.Name;
+}
+
+<h2>Edit Category</h2>
+@using (Html.BeginForm("Edit", "Category", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.Category_ID)
+
+    @Html.EditorForModel()
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save Changes" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Cancel", "Category", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+

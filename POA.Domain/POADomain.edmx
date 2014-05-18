@@ -1,0 +1,777 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="POADBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="Agent_ID" />
+          </Key>
+          <Property Name="Agent_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Middle_Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="KifleKetema" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Wereda" Type="nvarchar" MaxLength="250" />
+          <Property Name="House_No" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_No" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country_Of_Birth_ID" Type="int" Nullable="false" />
+          <Property Name="Country_Of_CitizenShip_ID" Type="int" Nullable="false" />
+          <Property Name="Country_Of_Residence_ID" Type="int" Nullable="false" />
+          <Property Name="Title_ID" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" />
+          <Property Name="Phone_No" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="Category_SubCategory">
+          <Key>
+            <PropertyRef Name="Category_SubCategory_ID" />
+          </Key>
+          <Property Name="Category_SubCategory_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_ID" Type="int" Nullable="false" />
+          <Property Name="SubCategory_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Country_ID" />
+          </Key>
+          <Property Name="Country_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="LogAction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Action" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Controller" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ActionDate" Type="datetime" Nullable="false" />
+          <Property Name="ActionBy" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Principal_Agent">
+          <Key>
+            <PropertyRef Name="Principal_Agent_ID" />
+          </Key>
+          <Property Name="Principal_Agent_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Principal_ID" Type="int" Nullable="false" />
+          <Property Name="Agent_ID" Type="int" Nullable="false" />
+          <Property Name="Template_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Principal_Agent_Category_SubCategory">
+          <Key>
+            <PropertyRef Name="Principal_Agent_Category_SubCategory_ID" />
+          </Key>
+          <Property Name="Principal_Agent_Category_SubCategory_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Principal_Agent_ID" Type="int" Nullable="false" />
+          <Property Name="Category_SubCategory_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SubCategory">
+          <Key>
+            <PropertyRef Name="SubCategory_ID" />
+          </Key>
+          <Property Name="SubCategory_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="Template_ID" />
+          </Key>
+          <Property Name="Template_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="Header" Type="nvarchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="Title_ID" />
+          </Key>
+          <Property Name="Title_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title_Description" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_Agent_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+          <End Role="Agent1" Type="Self.Agent" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Agent_ID" />
+            </Principal>
+            <Dependent Role="Agent1">
+              <PropertyRef Name="Agent_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Country_ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="Country_Of_Birth_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Country1">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Country_ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="Country_Of_CitizenShip_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Country2">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Country_ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="Country_Of_Residence_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Title">
+          <End Role="Title" Type="Self.Title" Multiplicity="1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="Title_ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="Title_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_SubCategory_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Category_SubCategory" Type="Self.Category_SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="Category_SubCategory">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_SubCategory_SubCategory">
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="1" />
+          <End Role="Category_SubCategory" Type="Self.Category_SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="SubCategory_ID" />
+            </Principal>
+            <Dependent Role="Category_SubCategory">
+              <PropertyRef Name="SubCategory_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Principal_Agent_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+          <End Role="Principal_Agent" Type="Self.Principal_Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Agent_ID" />
+            </Principal>
+            <Dependent Role="Principal_Agent">
+              <PropertyRef Name="Principal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Principal_Agent_Agent1">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+          <End Role="Principal_Agent" Type="Self.Principal_Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Agent_ID" />
+            </Principal>
+            <Dependent Role="Principal_Agent">
+              <PropertyRef Name="Agent_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Principal_Agent_Category_SubCategory_Category_SubCategory">
+          <End Role="Category_SubCategory" Type="Self.Category_SubCategory" Multiplicity="1" />
+          <End Role="Principal_Agent_Category_SubCategory" Type="Self.Principal_Agent_Category_SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_SubCategory">
+              <PropertyRef Name="Category_SubCategory_ID" />
+            </Principal>
+            <Dependent Role="Principal_Agent_Category_SubCategory">
+              <PropertyRef Name="Category_SubCategory_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Principal_Agent_Category_SubCategory_Principal_Agent">
+          <End Role="Principal_Agent" Type="Self.Principal_Agent" Multiplicity="1" />
+          <End Role="Principal_Agent_Category_SubCategory" Type="Self.Principal_Agent_Category_SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Principal_Agent">
+              <PropertyRef Name="Principal_Agent_ID" />
+            </Principal>
+            <Dependent Role="Principal_Agent_Category_SubCategory">
+              <PropertyRef Name="Principal_Agent_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Principal_Agent_Template">
+          <End Role="Template" Type="Self.Template" Multiplicity="1" />
+          <End Role="Principal_Agent" Type="Self.Principal_Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Template_ID" />
+            </Principal>
+            <Dependent Role="Principal_Agent">
+              <PropertyRef Name="Template_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="POADBModelStoreContainer">
+          <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category_SubCategory" EntityType="Self.Category_SubCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LogAction" EntityType="Self.LogAction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Principal_Agent" EntityType="Self.Principal_Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Principal_Agent_Category_SubCategory" EntityType="Self.Principal_Agent_Category_SubCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Template" EntityType="Self.Template" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Title" EntityType="Self.Title" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Agent_Agent" Association="Self.FK_Agent_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Agent1" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Country" Association="Self.FK_Agent_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Agent" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Country1" Association="Self.FK_Agent_Country1">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Agent" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Country2" Association="Self.FK_Agent_Country2">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Agent" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Title" Association="Self.FK_Agent_Title">
+            <End Role="Title" EntitySet="Title" />
+            <End Role="Agent" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_SubCategory_Category" Association="Self.FK_Category_SubCategory_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Category_SubCategory" EntitySet="Category_SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_SubCategory_SubCategory" Association="Self.FK_Category_SubCategory_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategory" />
+            <End Role="Category_SubCategory" EntitySet="Category_SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Principal_Agent_Agent" Association="Self.FK_Principal_Agent_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Principal_Agent" EntitySet="Principal_Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Principal_Agent_Agent1" Association="Self.FK_Principal_Agent_Agent1">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Principal_Agent" EntitySet="Principal_Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Principal_Agent_Category_SubCategory_Category_SubCategory" Association="Self.FK_Principal_Agent_Category_SubCategory_Category_SubCategory">
+            <End Role="Category_SubCategory" EntitySet="Category_SubCategory" />
+            <End Role="Principal_Agent_Category_SubCategory" EntitySet="Principal_Agent_Category_SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Principal_Agent_Category_SubCategory_Principal_Agent" Association="Self.FK_Principal_Agent_Category_SubCategory_Principal_Agent">
+            <End Role="Principal_Agent" EntitySet="Principal_Agent" />
+            <End Role="Principal_Agent_Category_SubCategory" EntitySet="Principal_Agent_Category_SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Principal_Agent_Template" Association="Self.FK_Principal_Agent_Template">
+            <End Role="Template" EntitySet="Template" />
+            <End Role="Principal_Agent" EntitySet="Principal_Agent" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="POADBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category_SubCategory" Relationship="Self.FK_Category_SubCategory_Category" FromRole="Category" ToRole="Category_SubCategory" />
+        </EntityType>
+        <EntityType Name="Category_SubCategory">
+          <Key>
+            <PropertyRef Name="Category_SubCategory_ID" />
+          </Key>
+          <Property Name="Category_SubCategory_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_ID" Type="Int32" Nullable="false" />
+          <Property Name="SubCategory_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Category_SubCategory_Category" FromRole="Category_SubCategory" ToRole="Category" />
+          <NavigationProperty Name="SubCategory" Relationship="Self.FK_Category_SubCategory_SubCategory" FromRole="Category_SubCategory" ToRole="SubCategory" />
+          <NavigationProperty Name="Principal_Agent_Category_SubCategory" Relationship="Self.FK_Principal_Agent_Category_SubCategory_Category_SubCategory" FromRole="Category_SubCategory" ToRole="Principal_Agent_Category_SubCategory" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Country_ID" />
+          </Key>
+          <Property Name="Country_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agents" Relationship="POADBModel.FK_Agent_Country" FromRole="Country" ToRole="Agent" />
+          <NavigationProperty Name="Agents1" Relationship="POADBModel.FK_Agent_Country1" FromRole="Country" ToRole="Agent" />
+          <NavigationProperty Name="Agents2" Relationship="POADBModel.FK_Agent_Country2" FromRole="Country" ToRole="Agent" />
+          </EntityType>
+        <EntityType Name="LogAction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Action" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Controller" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ActionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ActionBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Principal_Agent">
+          <Key>
+            <PropertyRef Name="Principal_Agent_ID" />
+          </Key>
+          <Property Name="Principal_Agent_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Principal_ID" Type="Int32" Nullable="false" />
+          <Property Name="Agent_ID" Type="Int32" Nullable="false" />
+          <Property Name="Template_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Principal_Agent_Category_SubCategory" Relationship="Self.FK_Principal_Agent_Category_SubCategory_Principal_Agent" FromRole="Principal_Agent" ToRole="Principal_Agent_Category_SubCategory" />
+          <NavigationProperty Name="Template" Relationship="Self.FK_Principal_Agent_Template" FromRole="Principal_Agent" ToRole="Template" />
+          <NavigationProperty Name="Agent" Relationship="POADBModel.FK_Principal_Agent_Agent" FromRole="Principal_Agent" ToRole="Agent" />
+          <NavigationProperty Name="Agent1" Relationship="POADBModel.FK_Principal_Agent_Agent1" FromRole="Principal_Agent" ToRole="Agent" />
+        </EntityType>
+        <EntityType Name="Principal_Agent_Category_SubCategory">
+          <Key>
+            <PropertyRef Name="Principal_Agent_Category_SubCategory_ID" />
+          </Key>
+          <Property Name="Principal_Agent_Category_SubCategory_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Principal_Agent_ID" Type="Int32" Nullable="false" />
+          <Property Name="Category_SubCategory_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category_SubCategory" Relationship="Self.FK_Principal_Agent_Category_SubCategory_Category_SubCategory" FromRole="Principal_Agent_Category_SubCategory" ToRole="Category_SubCategory" />
+          <NavigationProperty Name="Principal_Agent" Relationship="Self.FK_Principal_Agent_Category_SubCategory_Principal_Agent" FromRole="Principal_Agent_Category_SubCategory" ToRole="Principal_Agent" />
+        </EntityType>
+        <EntityType Name="SubCategory">
+          <Key>
+            <PropertyRef Name="SubCategory_ID" />
+          </Key>
+          <Property Name="SubCategory_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category_SubCategory" Relationship="Self.FK_Category_SubCategory_SubCategory" FromRole="SubCategory" ToRole="Category_SubCategory" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="Template_ID" />
+          </Key>
+          <Property Name="Template_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Header" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Principal_Agent" Relationship="Self.FK_Principal_Agent_Template" FromRole="Template" ToRole="Principal_Agent" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="Title_ID" />
+          </Key>
+          <Property Name="Title_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title_Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agents" Relationship="POADBModel.FK_Agent_Title" FromRole="Title" ToRole="Agent" />
+        </EntityType>
+        <Association Name="FK_Category_SubCategory_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Category_SubCategory" Type="Self.Category_SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="Category_SubCategory">
+              <PropertyRef Name="Category_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Category_SubCategory_SubCategory">
+          <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="1" />
+          <End Role="Category_SubCategory" Type="Self.Category_SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategory">
+              <PropertyRef Name="SubCategory_ID" />
+            </Principal>
+            <Dependent Role="Category_SubCategory">
+              <PropertyRef Name="SubCategory_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Principal_Agent_Category_SubCategory_Category_SubCategory">
+          <End Role="Category_SubCategory" Type="Self.Category_SubCategory" Multiplicity="1" />
+          <End Role="Principal_Agent_Category_SubCategory" Type="Self.Principal_Agent_Category_SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category_SubCategory">
+              <PropertyRef Name="Category_SubCategory_ID" />
+            </Principal>
+            <Dependent Role="Principal_Agent_Category_SubCategory">
+              <PropertyRef Name="Category_SubCategory_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Principal_Agent_Category_SubCategory_Principal_Agent">
+          <End Role="Principal_Agent" Type="Self.Principal_Agent" Multiplicity="1" />
+          <End Role="Principal_Agent_Category_SubCategory" Type="Self.Principal_Agent_Category_SubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Principal_Agent">
+              <PropertyRef Name="Principal_Agent_ID" />
+            </Principal>
+            <Dependent Role="Principal_Agent_Category_SubCategory">
+              <PropertyRef Name="Principal_Agent_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Principal_Agent_Template">
+          <End Role="Template" Type="Self.Template" Multiplicity="1" />
+          <End Role="Principal_Agent" Type="Self.Principal_Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Template_ID" />
+            </Principal>
+            <Dependent Role="Principal_Agent">
+              <PropertyRef Name="Template_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="POADBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Category_SubCategory" EntityType="Self.Category_SubCategory" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="LogActions" EntityType="Self.LogAction" />
+          <EntitySet Name="Principal_Agent" EntityType="Self.Principal_Agent" />
+          <EntitySet Name="Principal_Agent_Category_SubCategory" EntityType="Self.Principal_Agent_Category_SubCategory" />
+          <EntitySet Name="SubCategories" EntityType="Self.SubCategory" />
+          <EntitySet Name="Templates" EntityType="Self.Template" />
+          <EntitySet Name="Titles" EntityType="Self.Title" />
+          <AssociationSet Name="FK_Category_SubCategory_Category" Association="Self.FK_Category_SubCategory_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Category_SubCategory" EntitySet="Category_SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Category_SubCategory_SubCategory" Association="Self.FK_Category_SubCategory_SubCategory">
+            <End Role="SubCategory" EntitySet="SubCategories" />
+            <End Role="Category_SubCategory" EntitySet="Category_SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Principal_Agent_Category_SubCategory_Category_SubCategory" Association="Self.FK_Principal_Agent_Category_SubCategory_Category_SubCategory">
+            <End Role="Category_SubCategory" EntitySet="Category_SubCategory" />
+            <End Role="Principal_Agent_Category_SubCategory" EntitySet="Principal_Agent_Category_SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Principal_Agent_Category_SubCategory_Principal_Agent" Association="Self.FK_Principal_Agent_Category_SubCategory_Principal_Agent">
+            <End Role="Principal_Agent" EntitySet="Principal_Agent" />
+            <End Role="Principal_Agent_Category_SubCategory" EntitySet="Principal_Agent_Category_SubCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Principal_Agent_Template" Association="Self.FK_Principal_Agent_Template">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="Principal_Agent" EntitySet="Principal_Agent" />
+          </AssociationSet>
+          <EntitySet Name="Agents" EntityType="POADBModel.Agent" />
+          <AssociationSet Name="FK_Agent_Agent" Association="POADBModel.FK_Agent_Agent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="Agent1" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Country" Association="POADBModel.FK_Agent_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Agent" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Country1" Association="POADBModel.FK_Agent_Country1">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Agent" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Country2" Association="POADBModel.FK_Agent_Country2">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Agent" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Title" Association="POADBModel.FK_Agent_Title">
+            <End Role="Title" EntitySet="Titles" />
+            <End Role="Agent" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Principal_Agent_Agent" Association="POADBModel.FK_Principal_Agent_Agent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="Principal_Agent" EntitySet="Principal_Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Principal_Agent_Agent1" Association="POADBModel.FK_Principal_Agent_Agent1">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="Principal_Agent" EntitySet="Principal_Agent" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="Agent_ID" />
+          </Key>
+          <Property Name="Agent_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Middle_Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="KifleKetema" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Wereda" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="House_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID_No" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country_Of_Birth_ID" Type="Int32" Nullable="false" />
+          <Property Name="Country_Of_CitizenShip_ID" Type="Int32" Nullable="false" />
+          <Property Name="Country_Of_Residence_ID" Type="Int32" Nullable="false" />
+          <Property Name="Title_ID" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_No" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agent1" Relationship="POADBModel.FK_Agent_Agent" FromRole="Agent" ToRole="Agent1" />
+          <NavigationProperty Name="Agent2" Relationship="POADBModel.FK_Agent_Agent" FromRole="Agent1" ToRole="Agent" />
+          <NavigationProperty Name="Country" Relationship="POADBModel.FK_Agent_Country" FromRole="Agent" ToRole="Country" />
+          <NavigationProperty Name="Country1" Relationship="POADBModel.FK_Agent_Country1" FromRole="Agent" ToRole="Country" />
+          <NavigationProperty Name="Country2" Relationship="POADBModel.FK_Agent_Country2" FromRole="Agent" ToRole="Country" />
+          <NavigationProperty Name="Title" Relationship="POADBModel.FK_Agent_Title" FromRole="Agent" ToRole="Title" />
+          <NavigationProperty Name="Principal_Agent" Relationship="POADBModel.FK_Principal_Agent_Agent" FromRole="Agent" ToRole="Principal_Agent" />
+          <NavigationProperty Name="Principal_Agent1" Relationship="POADBModel.FK_Principal_Agent_Agent1" FromRole="Agent" ToRole="Principal_Agent" />
+        </EntityType>
+        <Association Name="FK_Agent_Agent">
+          <End Type="POADBModel.Agent" Role="Agent" Multiplicity="1" />
+          <End Type="POADBModel.Agent" Role="Agent1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Agent_ID" />
+            </Principal>
+            <Dependent Role="Agent1">
+              <PropertyRef Name="Agent_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Country">
+          <End Type="POADBModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="POADBModel.Agent" Role="Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Country_ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="Country_Of_Birth_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Country1">
+          <End Type="POADBModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="POADBModel.Agent" Role="Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Country_ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="Country_Of_CitizenShip_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Country2">
+          <End Type="POADBModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="POADBModel.Agent" Role="Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Country_ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="Country_Of_Residence_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Title">
+          <End Type="POADBModel.Title" Role="Title" Multiplicity="1" />
+          <End Type="POADBModel.Agent" Role="Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="Title_ID" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="Title_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Principal_Agent_Agent">
+          <End Type="POADBModel.Agent" Role="Agent" Multiplicity="1" />
+          <End Type="POADBModel.Principal_Agent" Role="Principal_Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Agent_ID" />
+            </Principal>
+            <Dependent Role="Principal_Agent">
+              <PropertyRef Name="Principal_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Principal_Agent_Agent1">
+          <End Type="POADBModel.Agent" Role="Agent" Multiplicity="1" />
+          <End Type="POADBModel.Principal_Agent" Role="Principal_Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="Agent_ID" />
+            </Principal>
+            <Dependent Role="Principal_Agent">
+              <PropertyRef Name="Agent_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="POADBModelStoreContainer" CdmEntityContainer="POADBEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="POADBModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Category_SubCategory">
+            <EntityTypeMapping TypeName="POADBModel.Category_SubCategory">
+              <MappingFragment StoreEntitySet="Category_SubCategory">
+                <ScalarProperty Name="Category_SubCategory_ID" ColumnName="Category_SubCategory_ID" />
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="SubCategory_ID" ColumnName="SubCategory_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="POADBModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Country_ID" ColumnName="Country_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogActions">
+            <EntityTypeMapping TypeName="POADBModel.LogAction">
+              <MappingFragment StoreEntitySet="LogAction">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+                <ScalarProperty Name="ActionBy" ColumnName="ActionBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Principal_Agent">
+            <EntityTypeMapping TypeName="POADBModel.Principal_Agent">
+              <MappingFragment StoreEntitySet="Principal_Agent">
+                <ScalarProperty Name="Principal_Agent_ID" ColumnName="Principal_Agent_ID" />
+                <ScalarProperty Name="Principal_ID" ColumnName="Principal_ID" />
+                <ScalarProperty Name="Agent_ID" ColumnName="Agent_ID" />
+                <ScalarProperty Name="Template_ID" ColumnName="Template_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Principal_Agent_Category_SubCategory">
+            <EntityTypeMapping TypeName="POADBModel.Principal_Agent_Category_SubCategory">
+              <MappingFragment StoreEntitySet="Principal_Agent_Category_SubCategory">
+                <ScalarProperty Name="Principal_Agent_Category_SubCategory_ID" ColumnName="Principal_Agent_Category_SubCategory_ID" />
+                <ScalarProperty Name="Principal_Agent_ID" ColumnName="Principal_Agent_ID" />
+                <ScalarProperty Name="Category_SubCategory_ID" ColumnName="Category_SubCategory_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubCategories">
+            <EntityTypeMapping TypeName="POADBModel.SubCategory">
+              <MappingFragment StoreEntitySet="SubCategory">
+                <ScalarProperty Name="SubCategory_ID" ColumnName="SubCategory_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Templates">
+            <EntityTypeMapping TypeName="POADBModel.Template">
+              <MappingFragment StoreEntitySet="Template">
+                <ScalarProperty Name="Template_ID" ColumnName="Template_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Titles">
+            <EntityTypeMapping TypeName="POADBModel.Title">
+              <MappingFragment StoreEntitySet="Title">
+                <ScalarProperty Name="Title_ID" ColumnName="Title_ID" />
+                <ScalarProperty Name="Title_Name" ColumnName="Title_Name" />
+                <ScalarProperty Name="Title_Description" ColumnName="Title_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="POADBModel.Agent">
+              <MappingFragment StoreEntitySet="Agent">
+                <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Title_ID" ColumnName="Title_ID" />
+                <ScalarProperty Name="Country_Of_Residence_ID" ColumnName="Country_Of_Residence_ID" />
+                <ScalarProperty Name="Country_Of_CitizenShip_ID" ColumnName="Country_Of_CitizenShip_ID" />
+                <ScalarProperty Name="Country_Of_Birth_ID" ColumnName="Country_Of_Birth_ID" />
+                <ScalarProperty Name="ID_No" ColumnName="ID_No" />
+                <ScalarProperty Name="House_No" ColumnName="House_No" />
+                <ScalarProperty Name="Wereda" ColumnName="Wereda" />
+                <ScalarProperty Name="KifleKetema" ColumnName="KifleKetema" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Agent_ID" ColumnName="Agent_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

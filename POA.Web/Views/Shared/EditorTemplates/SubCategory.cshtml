@@ -1,0 +1,23 @@
+﻿
+@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Web;
+@using System.Web.Mvc;
+@using System.Web.Optimization;
+@using StructureMap.TypeRules;
+@using POA.Web.Infrastructure.Tasks;
+@using POA.Domain
+@using POA.Web.Infrastructure
+@using System.Data.Entity.SqlServer
+@using StructureMap
+@using System.Collections
+
+@model string
+@using (POADBEntities _context = new POADBEntities())
+{
+    
+    POA.Web.Models.Category.SubCategoryModel SubCat = new POA.Web.Models.Category.SubCategoryModel(_context, Model);    
+     @Html.CheckBoxListFor(m => SubCat.SelectedSources, SubCat.SubCategorySources, "SubCat_" + Model, new { @class = "checkbox" })    
+}
+

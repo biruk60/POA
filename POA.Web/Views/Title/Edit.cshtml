@@ -1,0 +1,22 @@
+﻿
+@model POA.Web.Models.Title.EditTitleForm
+@{
+    ViewBag.Title = "Edit " + Model.Title_Name;
+}
+
+<h2>Edit Title</h2>
+@using (Html.BeginForm("Edit", "Title", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(m => m.Title_ID)
+   
+     @Html.EditorForModel()
+        
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save Changes" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Cancel", "Title", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}

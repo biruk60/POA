@@ -1,0 +1,41 @@
+﻿
+@model POA.Web.Models.Template.TemplateDetailsViewModel
+
+@{
+    ViewBag.Template = Model.Name;
+}
+
+
+
+<div class="well">
+    <p class="lead">
+        @Model.Name
+    </p>
+
+    <p class="lead">
+        @Model.Content
+    </p>
+</div>
+<div>
+    @using (Html.BeginForm("Delete", "Template", new { id = Model.Template_ID }, FormMethod.Post, new { id = "delete-form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ActionLink("Edit Template", "Edit", "Template", new { id = Model.Template_ID }, new { @class = "btn btn-primary" })
+        <button type="submit" class="btn btn-warning">Delete Template</button>
+        @Html.ActionLink("Cancel", "Cancel", "Template", new { @class = "btn btn-primary" })
+    }
+
+</div>
+
+
+
+@section scripts
+{
+    <script>
+        $(function () {
+            $("#delete-form").on("submit", function () {
+                return confirm("Are you sure you wish to delete this Template?  You cannot undo this action.");
+            });
+        });
+    </script>
+}

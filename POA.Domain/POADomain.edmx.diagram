@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1cfb72cab784474b928ce7c4772bd5b0" Name="Diagram1">
+        <EntityTypeShape EntityType="POADBModel.Category" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="POADBModel.Category_SubCategory" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="POADBModel.Country" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="POADBModel.LogAction" Width="1.5" PointX="5.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="POADBModel.Principal_Agent" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="POADBModel.Principal_Agent_Category_SubCategory" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="POADBModel.SubCategory" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="POADBModel.Template" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="POADBModel.Title" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="POADBModel.FK_Category_SubCategory_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="POADBModel.FK_Category_SubCategory_SubCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="POADBModel.FK_Principal_Agent_Category_SubCategory_Category_SubCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="POADBModel.FK_Principal_Agent_Category_SubCategory_Principal_Agent" ManuallyRouted="false" />
+        <AssociationConnector Association="POADBModel.FK_Principal_Agent_Template" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="POADBModel.Agent" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="POADBModel.FK_Agent_Agent" />
+        <AssociationConnector Association="POADBModel.FK_Agent_Country" />
+        <AssociationConnector Association="POADBModel.FK_Agent_Country1" />
+        <AssociationConnector Association="POADBModel.FK_Agent_Country2" />
+        <AssociationConnector Association="POADBModel.FK_Agent_Title" />
+        <AssociationConnector Association="POADBModel.FK_Principal_Agent_Agent" />
+        <AssociationConnector Association="POADBModel.FK_Principal_Agent_Agent1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

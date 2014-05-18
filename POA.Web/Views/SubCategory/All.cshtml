@@ -1,0 +1,27 @@
+﻿
+@model POA.Web.Models.SubCategory.SubCategorySummaryViewModel[]
+<br />
+<br />
+<div>
+    @Html.ActionLink("Create New SubCategory", "New", "SubCategory", new { @class = "btn btn-primary" })
+</div>
+<table class="table table-hover">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody class="row-link" data-link="row">
+        @foreach (var subcategory in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(@subcategory.Name, "View", "SubCategory", routeValues: new { id = @subcategory.SubCategory_ID }, htmlAttributes: null)</td>
+                <td>@subcategory.Description</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+

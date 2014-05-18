@@ -1,0 +1,20 @@
+﻿
+@model POA.Web.Models.Country.NewCountryForm
+
+@{
+    ViewBag.Country = "New Country";
+}
+
+<h2>New Country</h2>
+@using (Html.BeginForm("New", "Country", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.EditorForModel()
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add Country" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Cancel", "Country", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}

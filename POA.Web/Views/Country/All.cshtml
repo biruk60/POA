@@ -1,0 +1,27 @@
+﻿
+@model POA.Web.Models.Country.CountrySummaryViewModel[]
+<br />
+<br />
+<div>
+    @Html.ActionLink("Create New Country", "New", "Country", new { @class = "btn btn-primary" })
+</div>
+<table class="table table-hover">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody class="row-link" data-link="row">
+        @foreach (var country in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(@country.Name, "View", "Country", routeValues: new { id = @country.Country_ID }, htmlAttributes: null)</td>
+                <td>@country.Description</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+

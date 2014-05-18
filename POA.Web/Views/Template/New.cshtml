@@ -1,0 +1,20 @@
+﻿
+@model POA.Web.Models.Template.NewTemplateForm
+
+@{
+    ViewBag.Template = "New Template";
+}
+
+<h2>New Template</h2>
+@using (Html.BeginForm("New", "Template", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.EditorForModel()
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add Template" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Cancel", "Template", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}

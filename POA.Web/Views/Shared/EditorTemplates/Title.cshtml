@@ -1,0 +1,31 @@
+﻿@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Web;
+@using System.Web.Mvc;
+@using System.Web.Optimization;
+@using StructureMap.TypeRules;
+@using POA.Domain
+@using POA.Web.Infrastructure
+@using System.Data.Entity.SqlServer
+@using StructureMap
+
+@model string
+@using (POADBEntities _context = new POADBEntities())
+{
+
+    //var dbContext = Context.GetContainer().GetInstance<POADBEntities>();
+
+
+    var availableTitles = _context.Titles.Select(u => new SelectListItem
+    {
+        Text = u.Title_Name,
+        Value = SqlFunctions.StringConvert((double)u.Title_ID).Trim(),
+        Selected = SqlFunctions.StringConvert((double)u.Title_ID).Trim() == Model
+    }).ToArray();
+
+
+    @Html.DropDownList("", availableTitles, new { @class = "form-control" })
+}
+
+

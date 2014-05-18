@@ -1,0 +1,20 @@
+﻿
+@model POA.Web.Models.Title.NewTitleForm
+
+@{
+    ViewBag.Title = "New Title";
+}
+
+<h2>New Issue</h2>
+@using (Html.BeginForm("New", "Title", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+     @Html.EditorForModel()
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add Title" class="btn btn-primary" />
+            @Html.ActionLink("Cancel", "Cancel", "Title", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}

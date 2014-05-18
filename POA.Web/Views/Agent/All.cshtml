@@ -1,0 +1,26 @@
+﻿
+@model POA.Web.Models.Agent.AgentSummaryViewModel[]
+<br />
+<br />
+<div>
+    @Html.ActionLink("Create New User", "New", "Agent", new { @class = "btn btn-primary" })
+</div>
+<table class="table table-hover">
+
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+    </thead>
+    <tbody class="row-link" data-link="row">
+        @foreach (var agent in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(@agent.First_Name, "View", "Agent", routeValues: new { id = @agent.Agent_ID }, htmlAttributes: null)</td>
+                <td>@agent.Last_Name</td>
+
+            </tr>
+        }
+    </tbody>
+</table>

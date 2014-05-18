@@ -1,0 +1,75 @@
+﻿
+@model POA.Web.Models.PowerOfAttorney.PrincipalModel
+
+@{
+    ViewBag.Title = "Principal";
+}
+
+
+
+@Html.EditorForModel()
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+    </div>
+</div>
+
+
+<div style="width:50%; padding-left:150px;">
+    <table>
+        <tr>
+            <td><b>Title:</b>&nbsp;</td>
+            <td>{{item.TitleName}}</td>
+        </tr>
+        <tr>
+            <td><b>First Name:</b>&nbsp;</td>
+            <td>{{item.First_Name}}</td>
+        </tr>
+        <tr>
+            <td><b>Middle Name:</b>&nbsp;</td>
+            <td>{{item.Middle_Name}}</td>
+        </tr>
+        <tr>
+            <td><b>Last Name:</b>&nbsp;</td>
+            <td>{{item.Last_Name}}</td>
+        </tr>
+        <tr>
+            <td><b>City:</b>&nbsp;</td>
+            <td>{{item.City}}</td>
+        </tr>
+        <tr>
+            <td><b>Kifle Ketema:</b> &nbsp;</td>
+            <td>{{item.KifleKetema}}</td>
+        </tr>
+        <tr>
+            <td><b>House No:</b>&nbsp;</td>
+            <td>{{item.House_No}}</td>
+        </tr>
+        <tr>
+            <td><b>ID No.:</b>&nbsp;</td>
+            <td>{{item.ID_No}}</td>
+        </tr>
+        <tr>
+            <td><b>Country Of Birth:</b>&nbsp;</td>
+            <td>{{item.BirthName}}</td>
+        </tr>
+        <tr>
+            <td><b>Country Of Citizenship:</b>&nbsp;</td>
+            <td>{{item.CitizenName}}</td>
+        </tr>
+        <tr>
+            <td><b>Country Of Residence:</b>&nbsp;</td>
+            <td>{{item.ResidenceName}}</td>
+        </tr>
+        <tr>
+            <td><b>Email Address:</b>&nbsp;</td>
+            <td>{{item.Email}}</td>
+        </tr>
+        <tr>
+            <td><b>Phone No.:</b>&nbsp;</td>
+            <td>{{item.Phone_No}}</td>
+        </tr>
+    </table>
+        
+   
+</div>

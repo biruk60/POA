@@ -1,0 +1,25 @@
+﻿@model POA.Web.Models.Title.TitleSummaryViewModel[]
+<br />
+<br />
+<div>
+    @Html.ActionLink("Create New Title", "New", "Title", new { @class = "btn btn-primary" })
+</div>
+<table class="table table-hover">
+   
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>            
+        </tr>
+    </thead>
+    <tbody class="row-link" data-link="row">
+        @foreach (var title in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(@title.Title_Name, "View", "Title", routeValues: new { id = @title.Title_ID }, htmlAttributes: null)</td>
+                <td>@title.Title_Description</td>
+
+            </tr>
+        }
+    </tbody>
+</table>

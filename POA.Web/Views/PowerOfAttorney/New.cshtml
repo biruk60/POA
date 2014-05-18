@@ -1,0 +1,61 @@
+﻿@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Web;
+@using System.Web.Mvc;
+@using System.Web.Optimization;
+@using StructureMap.TypeRules;
+@using POA.Web.Infrastructure.Tasks;
+@using POA.Domain
+@using POA.Web.Infrastructure
+@using System.Data.Entity.SqlServer
+@using StructureMap
+@using System.Collections
+
+<script src="~/Scripts/angular.js"></script>
+@using (Html.BeginForm("New", "PowerOfAttorney", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div ng-app="poaApp">
+        <div ng-controller="AppCtrl">
+           
+            @Html.Partial("PrincipalForm")<button ng-click="show()">Show</button>
+            @Html.Partial("AgentForm")
+
+           @using (POADBEntities _context = new POADBEntities())
+            {
+            var availableCategories = _context.Categories.Select(u => new SelectListItem
+            {
+            Text = u.Name,
+            Value = SqlFunctions.StringConvert((double)u.Category_ID).Trim()
+
+            }).ToArray();
+
+            //availableCategories.Select(x => x.Value).ToList();
+
+            foreach (SelectListItem sli in availableCategories)
+            {
+
+                <div id="show-section_@sli.Value" ng-click="section_(@sli.Value)" ng-class="{'btn-primary': is(@sli.Value)}" style="margin-left:120px;font-weight:bold;"> @sli.Text</div>
+                @*<p ng-click="section_(@sli.Value)" ng-class="{'btn-primary': is(@sli.Value)}"> @sli.Text</p>*@
+                <div id="section_@sli.Value" ng-show="is(@sli.Value)">
+                    @Html.Partial("CatSubCatForm", new ViewDataDictionary { { "id", sli.Value } })
+
+                </div>
+
+            }
+
+            }
+
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add Power Of Attorney" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", "Cancel", "PowerOfAttorney", new { @class = "btn btn-primary" })
+            </div>
+
+        </div>
+    </div>
+}
+
+
+
+<script src="~/Scripts/app/poaApp.js"></script>
+<script src="~/Scripts/app/controllers/AppCtrl.js"></script>
