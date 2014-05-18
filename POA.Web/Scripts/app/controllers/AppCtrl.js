@@ -16,11 +16,11 @@
 
        //document.writeln(agent_id);
         //$scope.init = init;
-       // $scope.show = show;
+        $scope.show = show;
         //$scope.cancel = cancel; 
        // $scope.item = {}
-       // function show()
-       // {
+        function show()
+        {
             var principal_id = $("#Principal_ID").val();
             $http({ method: 'GET', url: '/Agent/GetUserByID', params: { id: principal_id } }).
                success(function (data, status, headers, config) {
@@ -33,7 +33,7 @@
                    // or server returns response with an error status.
                    //alert(status);
                });
-      //  }
+        }
 
         $scope.section_ = function (id) {
             section_ = id;
